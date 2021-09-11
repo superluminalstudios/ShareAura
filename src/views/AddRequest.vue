@@ -39,17 +39,36 @@
           </div>
 
           <datalist id="items">
-            <option value="Phy 11"> </option>
-            <option value="Maths 11"> </option>
-            <option value="Chem 11"> </option>
-            <option value="Bio 11"> </option>
-            <option value="CS 11 P.1"> </option>
-            <option value="Applied Maths 11"> </option>
+            <option value="Phy 11 TB"> </option>
+            <option value="Math 11 TB"> </option>
+            <option value="Chem 11 TB"> </option>
+            <option value="Bio 11 TB"> </option>
+            <option value="CS 11 TB"> </option>
+            <option value="Applied Maths 11 TB"> </option>
+            <option value="Eng 11 Hornbill TB"> </option>
+            <option value="Eng 11 Snapshots TB"> </option>
+            <option value="Science 10 TB"> </option>
+            <option value="Math 10 TB"> </option>
+            <option value="History 10 TB"> </option>
+            <option value="Geography 10 TB"> </option>
+            <option value="Economics 10 TB"> </option>
+            <option value="Civics 10 TB"> </option>
+            <option value="Eng 10 First Flight TB"> </option>
+            <option value="Eng 10 Footprints Without Feet TB"> </option>
             <option value="Math 11 CW"> </option>
             <option value="Chem 11 CW"> </option>
             <option value="Bio 11 CW"> </option>
             <option value="Phy 11 CW"> </option>
-            <option value="Color Pastels"> </option>
+            <option value="Eng 11 CW"> </option>
+            <option value="Math 10 CW"> </option>
+            <option value="Chem 10 CW"> </option>
+            <option value="Bio 10 CW"> </option>
+            <option value="Phy 10 CW"> </option>
+            <option value="Eng 10 CW"> </option>
+            <option value="Social 10 CW"> </option>
+            <option value="English Dictonary"> </option>
+            <option value="Oil Pastels"> </option>
+            <option value="Watercolors"> </option>
             <option value="Geometry Box"> </option>
           </datalist>
 
