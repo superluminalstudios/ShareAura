@@ -8,7 +8,13 @@
             @click="() => router.push('/')"
             class="left-arrow"
           />
-          <!--TODO: Carousal-->
+          <Carousel :autoplay="4000" :wrap-around="true">
+						<Slide v-for="slide in carousalList" :key="slide">
+							<div class="carousel__item">
+								<img class="carousal-image" :src="slide"/>
+							</div>
+						</Slide>
+					</Carousel>
         </div>
         <div class="signup-lower">
           <form>
@@ -66,12 +72,16 @@ import axios from "axios";
 import { IonPage, IonContent } from "@ionic/vue";
 import { useRouter } from "vue-router";
 import { Storage } from "@ionic/storage";
+import { Carousel, Slide } from "vue3-carousel";
+import "vue3-carousel/dist/carousel.css";
 
 export default defineComponent({
   name: "Signup",
   components: {
     IonContent,
     IonPage,
+    Carousel,
+		Slide
   },
   setup() {
     const backIcon = require("../assets/back.svg");
@@ -80,6 +90,10 @@ export default defineComponent({
     const password = ref("");
     const router = useRouter();
     const store = new Storage();
+    const sim1 = require("../assets/sim1.png");
+		const sim2 = require("../assets/sim2.png");
+		const sim3 = require("../assets/sim3.png");
+    const carousalList = [sim1, sim2, sim3]
 
 const storeUserData = async () => {
     await store.create();
@@ -113,7 +127,7 @@ const storeUserData = async () => {
       phone,
       password,
       authApi,
-      store, storeUserData
+      store, storeUserData, carousalList
     };
   },
 });
@@ -163,6 +177,11 @@ h3 {
   position: fixed;
   left: 1.4rem;
   top: 2rem;
+}
+
+.carousal-image {
+	max-height: 13rem;
+	max-width: 13rem;
 }
 
 .signup-lower {
