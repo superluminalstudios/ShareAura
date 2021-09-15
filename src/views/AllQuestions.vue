@@ -72,7 +72,8 @@ export default defineComponent({
 		}
         
         function goToQues(ques) {
-			router.push(`question:${JSON.stringify(ques)}`);
+                        console.log(ques)
+			router.push(`question:${encodeURIComponent(JSON.stringify(ques))}`);
 		}
 
         return {

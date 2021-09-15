@@ -12,7 +12,7 @@
 						<input v-model="qtitle" class="q-search-input" placeholder="Question Title" type="text" />
 					</div>
 					<div class="q-search-wrapper">
-						<textarea v-model="qdesc" class="qt-search-input" placeholder="Question Title" maxlength="125"></textarea>
+						<textarea v-model="qdesc" class="qt-search-input" placeholder="Question Description" maxlength="125"></textarea>
 					</div>
 					<div class="cp-sign-button" @click="addQuestion">
 						Confirm & Post
