@@ -3,7 +3,7 @@
 		<ion-content>
 			<div class="cp-wrapper">
 				<div class="cp-upper-wrapper">
-					<img :src="backIcon" class="left-arrow" @click="() => router.push('/home')"/>
+					<img :src="backIcon" class="left-arrow" @click="() => router.go(-1)"/>
 					<h3 class="cp-title">Post a question</h3>
 					<h3 class="cp-subtitle">Make use of the community to settle your doubts. Keep questions civil and concise. Avoid using uneccessary terms like 'Urgent' and 'Help'. Explicit content will be removed and the poster's account banned.</h3>
 				</div>
@@ -47,12 +47,12 @@ export default defineComponent({
         const addQuestion = async () => {
             await store.create();
 			const nameData = await store.get("username");
-            axios.get(`https://staiclientapi.jeswinsunsi.repl.co/addquestion/${nameData}/${qtitle.value}/${qdesc.value}`)
+			const schoolData = await store.get("school");
+            axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${schoolData}/addquestion/${nameData}/${encodeURIComponent(qtitle.value)}/${encodeURIComponent(qdesc.value)}`)
             qtitle.value = ''
             qdesc.value = ''
-            router.push('/home')
+            router.go(-1)
             createToast({ title: "Success", description: "Your question has been posted" }, { type: "success", position: "bottom-right", transition: "slide", timeout: 3000 });
-
         }
 
         return {

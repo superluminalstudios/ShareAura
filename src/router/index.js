@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
-import Home from "../views/Home.vue";
+import Welcome from "../views/Welcome.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
-import Welcome from "../views/Welcome.vue";
+import SelectSchool from "../views/SelectSchool.vue";
+import Home from "../views/Home.vue";
 import Search from "../views/Search.vue";
 import Question from "../views/Question.vue";
 import AddRequest from "../views/AddRequest.vue";
@@ -27,14 +28,19 @@ const routes = [
     component: Signup,
   },
   {
-    path: "/allquestions",
+    path: "/allquestions:school",
     name: "AllQuestions",
     component: AllQuestions,
   },
   {
-    path: "/home",
+    path: "/home:school",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/selectschool",
+    name: "SelectSchool",
+    component: SelectSchool,
   },
   {
     path: "/addRequest",
@@ -58,7 +64,7 @@ const routes = [
     component: Search,
   },
   {
-    path: "/AllRequests",
+    path: "/AllRequests:school",
     name: "AllRequests",
     component: AllRequests,
   },

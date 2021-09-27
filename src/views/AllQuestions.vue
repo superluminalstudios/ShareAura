@@ -22,7 +22,7 @@
 				<div class="lower-body">
 					<div class="title-group-1">
 						<h1 class="titleg1-1">Questions Feed</h1>
-						<h1 class="titleg1-2" @click="() => router.push('/home')">Back</h1>
+						<h1 class="titleg1-2" @click="() => router.go(-1)">Back</h1>
 					</div>
 
 					<div class="request-post" v-for="question in allQuesList" :key="question._id" @click="goToQues(question)">
@@ -42,9 +42,10 @@
 
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { defineComponent, ref, onMounted } from "vue";
 import axios from "axios";
+import { Storage } from "@ionic/storage";
 
 export default defineComponent({
     name: "AllQuestions",
@@ -53,13 +54,16 @@ export default defineComponent({
         IonPage
     },
     setup() {
+        const route = useRoute();
         const router = useRouter();
 		var allQuesList = ref([]);
 		const search = require("../assets/search.png");
 		var userSearchInput = ref("");
+        const store = new Storage();
+
 
         onMounted(() =>
-			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/showquestions/15`).then((data) => {
+			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${route.params.school.replace(":", "")}/showquestions/15`).then((data) => {
 				for (let itemNum in data.data) {
 					let value = data.data[itemNum];
 					allQuesList.value.push(value);
@@ -67,17 +71,17 @@ export default defineComponent({
 			})
 		);
 
+
         function goToSearch() {
 			router.push(`search:${userSearchInput.value}`);
 		}
         
         function goToQues(ques) {
-                        console.log(ques)
 			router.push(`question:${encodeURIComponent(JSON.stringify(ques))}`);
 		}
 
         return {
-            router, allQuesList, search, userSearchInput, goToSearch, goToQues
+            router, allQuesList, search, userSearchInput, goToSearch, goToQues, store, route
         }
     }
 })

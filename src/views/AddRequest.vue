@@ -3,7 +3,7 @@
 		<ion-content>
 			<div class="cp-wrapper">
 				<div class="cp-upper-wrapper">
-					<img :src="backIcon" class="left-arrow" @click="() => router.push('/home')" />
+					<img :src="backIcon" class="left-arrow" @click="() => router.go(-1)" />
 					<h3 class="cp-title">Create a request</h3>
 					<h3 class="cp-subtitle">
 						Creating a request helps peers that have the books you need find you without hassle. Your contact number will be shared across our service.
@@ -105,31 +105,26 @@ export default defineComponent({
 			await store.create();
 			const phoneData = await store.get("phone");
 			const nameData = await store.get("username");
+			const schoolData = await store.get("school");
 
 			if (inputNumber.value == 3) {
-				axios.get(`https://staiclientapi.jeswinsunsi.repl.co/add/${nameData}/${phoneData}/${input1.value}+${input2.value}+${input3.value}`).then((data) => {
-					console.log(data.data);
-				});
-				router.push("/home");
+				axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${schoolData}/add/${nameData}/${phoneData}/${input1.value}+${input2.value}+${input3.value}`)
+				router.go(-1);
 				input1.value = "";
 				input2.value = "";
 				input3.value = "";
 				inputNumber.value = 1;
 				createToast({ title: "Success", description: "Your request has been posted" }, { type: "success", position: "bottom-right", transition: "slide", timeout: 3000 });
 			} else if (inputNumber.value == 2) {
-				axios.get(`https://staiclientapi.jeswinsunsi.repl.co/add/${nameData}/${phoneData}/${input1.value}+${input2.value}`).then((data) => {
-					console.log(data.data);
-				});
-				router.push("/home");
+				axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${schoolData}/add/${nameData}/${phoneData}/${input1.value}+${input2.value}`)
+				router.go(-1);
 				input1.value = "";
 				input2.value = "";
 				inputNumber.value = 1;
 				createToast({ title: "Success", description: "Your request has been posted" }, { type: "success", position: "bottom-right", transition: "slide", timeout: 3000 });
 			} else {
-				axios.get(`https://staiclientapi.jeswinsunsi.repl.co/add/${nameData}/${phoneData}/${input1.value}`).then((data) => {
-					console.log(data.data);
-				});
-				router.push("/home");
+				axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${schoolData}/add/${nameData}/${phoneData}/${input1.value}`)
+				router.go(-1);
 				input1.value = "";
 				inputNumber.value = 1;
 				createToast({ title: "Success", description: "Your request has been posted" }, { type: "success", position: "bottom-right", transition: "slide", timeout: 3000 });

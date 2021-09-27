@@ -83,7 +83,7 @@ export default defineComponent({
 					if (data.data.proceed == "True") {
 						name.value = data.data.name;
 						storeUserData();
-						router.push({ name: "Home" });
+						router.push({ name: "SelectSchool" });
 					} else {
 						signInFailed.value = true;
 					}

@@ -53,7 +53,7 @@
 				<div class="lower-body">
 					<div class="title-group-1">
 						<h1 class="titleg1-1">Requests</h1>
-						<h1 class="titleg1-2" @click="() => router.push('/AllRequests')">View All</h1>
+						<h1 class="titleg1-2" @click="() => router.push(`/AllRequests:${school}`)">View All</h1>
 					</div>
 					<div class="request-post" v-for="textbook in homeList" :key="textbook._id" @click="openModal(textbook.username, textbook.usernumber, textbook.itemList)">
 						<img class="user-avatar-small" :src="`https://ui-avatars.com/api/?background=random&name=${textbook.username.charAt(0)}`" />
@@ -80,7 +80,7 @@
 					</div>
 					<div class="title-group-1">
 						<h1 class="titleg1-1">Doubts</h1>
-						<h1 class="titleg1-2" @click="() => router.push('/allquestions')">View All</h1>
+						<h1 class="titleg1-2" @click="() => router.push(`/allquestions:${school}`)">View All</h1>
 					</div>
 
 					<div class="request-post" v-for="question in quesList" :key="question._id" @click="goToQues(question)">
@@ -101,7 +101,7 @@
 <script>
 import { IonContent, IonPage } from "@ionic/vue";
 import { defineComponent, onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import axios from "axios";
 
 export default defineComponent({
@@ -120,11 +120,13 @@ export default defineComponent({
 		var modalUsernumber = ref("");
 		var blur = ref(false);
 		const router = useRouter();
+		const route = useRoute();
 		var userSearchInput = ref("");
 		var quesList = ref([]);
+		const school = route.params.school.replace(":", "");
 
 		onMounted(() =>
-			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/category/textbook/3`).then((data) => {
+			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${school}/category/textbook/3`).then((data) => {
 				for (let itemNum in data.data) {
 					let value = data.data[itemNum];
 					homeList.value.push(value);
@@ -132,7 +134,7 @@ export default defineComponent({
 			})
 		);
 		onMounted(() =>
-			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/showquestions/3`).then((data) => {
+			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${school}/showquestions/3`).then((data) => {
 				for (let itemNum in data.data) {
 					let value = data.data[itemNum];
 					quesList.value.push(value);
@@ -141,10 +143,10 @@ export default defineComponent({
 		);
 
 		function changeHomeList(param) {
-			homeList.value.length = 0; // Deletes everything in homeList array
-			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/category/${param}/3`).then((data) => {
+			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${school}/category/${param}/3`).then((data) => {
 				for (let itemNum in data.data) {
 					let value = data.data[itemNum];
+					homeList.value.length = 0; // Deletes everything in homeList array
 					homeList.value.push(value);
 				}
 			});
@@ -166,7 +168,7 @@ export default defineComponent({
 		}
 
 		function goToQues(ques) {
-			router.push(`question:${JSON.stringify(ques)}`);
+			router.push(`question:${encodeURIComponent(JSON.stringify(ques))}`);
 		}
 
 		return {
@@ -186,6 +188,8 @@ export default defineComponent({
 			goToSearch,
 			goToQues,
 			quesList,
+			route,
+			school,
 		};
 	},
 });

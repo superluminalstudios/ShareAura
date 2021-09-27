@@ -1,7 +1,9 @@
 <template>
+<suspense>
   <ion-app>
     <ion-router-outlet :key="$route.fullPath"/>
   </ion-app>
+</suspense>
 </template>
 
 <script>

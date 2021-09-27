@@ -13,7 +13,7 @@
 				<div class="question-bottom-wrapper">
 					<div class="title-group-1">
 						<h1 class="titleg1-1">Answers</h1>
-						<h1 class="titleg1-2" @click="deleteData">Back</h1>
+						<h1 class="titleg1-2" @click="goBack">Back</h1>
 					</div>
 
 					<div class="user-ans-wrapper">
@@ -58,16 +58,16 @@ export default defineComponent({
 
 		onMounted(() => data.value.push(JSON.parse(route.params.q.replace(":", ""))));
 
-		function deleteData() {
-			router.push("/Home");
+		function goBack() {
+			router.go(-1);
 		}
 
 		const addNewAnswer = async (idAns) => {
 			await store.create();
 			const nameData = await store.get("username");
-			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/addanswer/${nameData}/${idAns}/${userAns.value}`);
+			const schoolData = await store.get("school");
+			axios.get(`https://staiclientapi.jeswinsunsi.repl.co/${schoolData}/addanswer/${nameData}/${idAns}/${encodeURIComponent(userAns.value)}`);
 			userAns.value = "";
-
 			createToast({ title: "Success", description: "Your answer has been posted" }, { type: "info", position: "bottom-right", transition: "slide", timeout: 3000 });
 		};
 
@@ -75,7 +75,7 @@ export default defineComponent({
 			route,
 			data,
 			router,
-			deleteData,
+			goBack,
 			addNewAnswer,
 			userAns,
 			store,

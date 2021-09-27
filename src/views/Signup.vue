@@ -111,7 +111,7 @@ const storeUserData = async () => {
             if (data.data.proceed == "True") {
               console.log("Success");
               storeUserData()
-              return router.push({ name: "Home" });
+              return router.push({ name: "SelectSchool" });
               
             }
           });
